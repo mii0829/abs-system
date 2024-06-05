@@ -3,7 +3,7 @@ class Reserve < ApplicationRecord
       reserves = Reserve.all
       reserves.each do |reserve|
         if reserve.end < Date.today
-          reserve.update(isRenting: 4)
+          reserve.update(isRenting: 3)
         elsif reserve.start == Date.today
           reserve.update(isRenting: 1)
         end

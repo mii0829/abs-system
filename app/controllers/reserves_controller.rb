@@ -47,7 +47,7 @@ class ReservesController < ApplicationController
 
   def return
     reserve = Reserve.find(params[:id])
-    if reserve.update(end: Time.zone.today, isRenting: 3)
+    if reserve.update(end: Time.zone.today, isRenting: 4)
       render json: { message: "Return successful" }, status: :ok
     else
       render json: { message: "Return failed" }, status: :unprocessable_entity
