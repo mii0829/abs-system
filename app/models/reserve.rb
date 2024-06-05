@@ -1,2 +1,3 @@
 class Reserve < ApplicationRecord
+    
 end

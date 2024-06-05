@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :lists
-  resources :reserves
+  resources :reserves do
+    member do
+      post 'return', to: 'reserves#return'
+      post 'use', to: 'reserves#use'
+    end
+  end
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

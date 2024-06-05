@@ -1,5 +1,5 @@
 class ReservesController < ApplicationController
-  before_action :set_reserf, only: %i[ show update destroy ]
+  before_action :set_reserf, only: %i[ show update destroy return use ]
 
   # GET /reserves
   def index
@@ -36,6 +36,24 @@ class ReservesController < ApplicationController
   # DELETE /reserves/1
   def destroy
     @reserf.destroy!
+  end
+
+  def return
+    reserve = Reserve.find(params[:id])
+    if reserve.update(end: Time.zone.today, isRenting: 0)
+      render json: { message: "Return successful" }, status: :ok
+    else
+      render json: { message: "Return failed" }, status: :unprocessable_entity
+    end
+  end
+
+  def use
+    reserve = Reserve.find(params[:id])
+    if reserve.update(isRenting: 1)
+      render json: { message: "use successful" }, status: :ok
+    else
+      render json: { message: "use failed" }, status: :unprocessable_entity
+    end
   end
 
   private
