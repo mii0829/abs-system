@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_04_222111) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_05_081325) do
   create_table "lists", force: :cascade do |t|
     t.text "name"
     t.text "detail"
     t.text "image"
-    t.boolean "usable"
+    t.boolean "usable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_222111) do
     t.integer "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "isRenting"
+    t.integer "isRenting", default: 0
   end
 
   create_table "users", force: :cascade do |t|

@@ -14,15 +14,22 @@ class ReservesController < ApplicationController
   end
 
   # POST /reserves
+  # POST /reserves
   def create
     @reserf = Reserve.new(reserf_params)
 
     if @reserf.save
+      # Check if the start date of the reservation matches today's date
+      if @reserf.start == Date.today
+        @reserf.update(isRenting: 1)
+      end
+
       render json: @reserf, status: :created, location: @reserf
     else
       render json: @reserf.errors, status: :unprocessable_entity
     end
   end
+
 
   # PATCH/PUT /reserves/1
   def update
@@ -40,19 +47,19 @@ class ReservesController < ApplicationController
 
   def return
     reserve = Reserve.find(params[:id])
-    if reserve.update(end: Time.zone.today, isRenting: 0)
+    if reserve.update(end: Time.zone.today, isRenting: 3)
       render json: { message: "Return successful" }, status: :ok
     else
       render json: { message: "Return failed" }, status: :unprocessable_entity
     end
   end
 
-  def use
+  def borrow
     reserve = Reserve.find(params[:id])
-    if reserve.update(isRenting: 1)
-      render json: { message: "use successful" }, status: :ok
+    if reserve.update(isRenting: 2)
+      render json: { message: "borrow successful" }, status: :ok
     else
-      render json: { message: "use failed" }, status: :unprocessable_entity
+      render json: { message: "borrow failed" }, status: :unprocessable_entity
     end
   end
 

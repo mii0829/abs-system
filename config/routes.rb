@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  resources :lists
+  resources :lists  
+
   resources :reserves do
     member do
       post 'return', to: 'reserves#return'
-      post 'use', to: 'reserves#use'
+      post 'borrow', to: 'reserves#borrow'
     end
   end
   resources :users
