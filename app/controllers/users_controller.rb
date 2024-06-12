@@ -31,17 +31,29 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
+    if @user.update(ip: params[:ip])
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
   end
 
+  # PATCH/PUT /users/1/owner
+  def update_owner
+    if @user.update(owner: true)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+
   # DELETE /users/1
   def destroy
     @user.destroy!
   end
+
+
 
   private
 

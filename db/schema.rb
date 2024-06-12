@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_05_081325) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_12_102011) do
   create_table "lists", force: :cascade do |t|
     t.text "name"
     t.text "detail"
@@ -34,10 +34,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_081325) do
     t.text "name"
     t.text "email"
     t.text "image"
-    t.boolean "owner"
+    t.boolean "owner", default: false
+    t.string "ip"
+    t.text "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "user_id"
   end
 
 end
