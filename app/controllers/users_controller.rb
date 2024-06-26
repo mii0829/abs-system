@@ -31,40 +31,37 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(ip: params[:ip])
+    if @user.update(reserf_params)
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
   end
-
-  # PATCH/PUT /users/1/owner
-  def update_owner
-    if @user.update(owner: true)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
-  end
-
 
   # DELETE /users/1
   def destroy
     @user.destroy!
   end
 
-
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find_by(user_id: params[:id])
-    #render json: { error: "User not found" }, status: :not_found if @user.nil?
+    # render json: { error: "User not found" }, status: :not_found if @user.nil?
+  end
+
+  def set_user_by_user_id
+    @user = User.find_by(user_id: params[:user_id])
+    # render json: { error: "User not found" }, status: :not_found if @user.nil?
   end
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:name, :email, :image, :owner, :user_id)
+    params.require(:user).permit(:name, :email, :image, :owner, :user_id, :ip)
+  end
+
+  def reserf_params
+    params.permit(:ip, :owner, :name)
   end
 end

@@ -18,6 +18,13 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'clockwork'
 
 
+# Gemfile
+gem 'carrierwave'
+gem 'mini_magick'
+
+gem 'ffi', '~> 1.17.0'
+
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
