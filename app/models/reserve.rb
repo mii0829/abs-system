@@ -1,4 +1,5 @@
 class Reserve < ApplicationRecord
+  belongs_to :list
     def self.update_is_renting_for_all
       reserves = Reserve.all
       reserves.each do |reserve|
@@ -9,5 +10,5 @@ class Reserve < ApplicationRecord
         end
       end
     end
-  end
+end
   

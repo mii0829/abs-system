@@ -1,11 +1,7 @@
-# fly.toml app configuration file generated for abs-system-snowy-rain-1136 on 2024-05-06T18:43:23+09:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
-app = 'logicode'
-primary_region = 'nrt'
-console_command = '/rails/bin/rails console'
+# fly.toml
+app = "logicode"
+primary_region = "nrt"
+console_command = "/rails/bin/rails console"
 
 [build]
 
@@ -15,9 +11,35 @@ console_command = '/rails/bin/rails console'
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
-  processes = ['app']
+  processes = ["app"]
 
 [[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
+  memory = "1gb"
+  cpu_kind = "shared"
   cpus = 1
+
+[processes]
+  app = "bundle exec puma -C config/puma.rb"
+
+[deploy]
+  release_command = "/bin/bash -c 'bundle exec rake db:migrate'"
+
+[[services]]
+  http_checks = []
+  internal_port = 3000
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+[[cron]]
+  schedule = "0 * * * *"
+  command = "bundle exec rake update_isrenting:run"

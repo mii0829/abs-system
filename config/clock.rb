@@ -9,6 +9,11 @@ module Clockwork
     puts "Running #{job}"
   end
 
+  Clockwork.configure do |config|
+    config[:tz] = 'Asia/Tokyo'
+  end
+
+  
   every(1.day, 'Update isRenting', at: '00:00') do #毎日0時にreserveを実行関数を実行（isRentingの値をアップデート）
     Reserve.update_is_renting_for_all
   end

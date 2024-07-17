@@ -17,12 +17,15 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'clockwork'
 
+# Gemfile
+#macでしか実行できないらしい
+# gem 'whenever', require: false
 
 # Gemfile
-gem 'carrierwave'
-gem 'mini_magick'
+# gem 'carrierwave'
+# gem 'mini_magick'
 
-gem 'ffi', '~> 1.17.0'
+# gem 'ffi', '~> 1.17.0'
 
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
@@ -42,6 +45,9 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+#active_storage
+gem 'active_model_serializers'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
