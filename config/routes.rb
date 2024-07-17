@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :lists  
+  resources :tags
+  resources :lists do
+    collection do
+      get 'tag/:tag_id', to: 'lists#tag'
+    end
+  end
+  
 
   resources :reserves do
     member do

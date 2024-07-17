@@ -1,11 +1,9 @@
-# app/controllers/lists_controller.rb
 class ListsController < ApplicationController
   before_action :set_list, only: %i[ show update destroy ]
 
   # GET /lists
   def index
     @lists = List.all
-
     render json: @lists
   end
 
@@ -39,6 +37,12 @@ class ListsController < ApplicationController
     @list.destroy!
   end
 
+  # GET /lists/tag/:tag_id
+  def tag
+    @lists = List.where(tag_id: params[:tag_id])
+    render json: @lists
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -48,6 +52,6 @@ class ListsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def list_params
-    params.require(:list).permit(:name, :detail, :image, :usable)
+    params.require(:list).permit(:name, :detail, :image, :usable, :tag_id)
   end
 end

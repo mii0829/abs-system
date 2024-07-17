@@ -17,6 +17,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'clockwork'
 
+gem 'active_model_serializers'
+
 # Gemfile
 #macでしか実行できないらしい
 # gem 'whenever', require: false
